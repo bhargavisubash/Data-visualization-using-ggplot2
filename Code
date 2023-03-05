@@ -1,0 +1,51 @@
+student<-read.csv("Student.csv",stringsAsFactors = FALSE)
+View(student)
+str(student)
+
+student$Gender<- as.factor(student$Gender)
+
+student$year<-as.factor(student$year)
+
+student$Depression<-as.factor(student$Depression)
+
+
+str(student)
+
+prop.table(table(student$course)) 
+
+library(ggplot2)
+
+ggplot(student, aes(x =Depression)) + theme_update() +
+  geom_bar() +labs(y = "count of students", title = " Depressed Student Count")
+
+ggplot(student, aes(x = Gender, fill = Depression)) + theme_linedraw() +
+  geom_bar() +
+  labs(y = "count of students",
+       title = "Depressed Student Count by Gender")
+
+ggplot(student, aes(x =year, fill = Depression)) + theme_light() +
+  geom_bar() +
+  labs(y = "student Count",
+       title = "Depressed Student Count by year")
+
+ggplot(student, aes(x = Gender, fill = Depression)) + theme_light() +
+  facet_grid(~year) + geom_bar() +
+  labs(y = "student count",
+       title = "Depressed Student Count by year and gender")
+
+ggplot(student, aes(x = "", fill = Depression)) +
+  geom_bar(position = "fill") + coord_polar(theta = "y")
+
+ggplot(student, aes(x=Age))+ theme_linedraw() + geom_histogram(binwidth = 1,fill="purple")
+
+ggplot(student, aes(x = Age, fill = Depression)) +
+  theme_bw() + geom_histogram(binwidth = 1) +
+  labs(y = "student count", x = "Age",
+       title = "student Age distribution")
+
+ggplot(student, aes(x = Depression, y = Age)) + theme_dark() +
+  geom_boxplot() +
+  labs(y = "Age", x = "Depressed",
+       title = "Student Depression rate by age")
+
+ggplot(student, aes(x=Age)) + geom_density()
